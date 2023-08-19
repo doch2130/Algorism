@@ -10,7 +10,10 @@
 // 오름차순 정렬하는 프로그램
 // 3, 7, 8, 1, 5, 9, 6, 10, 2, 4
 
+// 내림차순으로 변경하고 싶은 경우 조건문의 부등호만 변경해주면 된다.
+
 const array = [3, 7, 8, 1, 5, 9, 6, 10, 2, 4];
+// const array = [10, 1, 2, 3, 4, 5];
 
 console.log('start array ', array);
 // 코드 시작
@@ -27,9 +30,14 @@ function quickSort(data, start, end) {
 
   while (i <= j) {
     // 엇갈릴 때까지 반복
-    while (data[key] >= data[i]) {
+    while (data[key] >= data[i] && i <= end) {
       // 키 값보다 큰 값을 만날 때까지 반복
+      // 키 값이 제일 큰 값인 경우 범위를 넘어가는 현상을 방지하기 위해 i <= end 설정
       i++;
+      if (i > data.length) {
+        i = 0;
+        break;
+      }
     }
     while (data[key] <= data[j] && j > start) {
       // 키 값보다 작은 값을 만날 때까지 반복
@@ -56,7 +64,7 @@ function quickSort(data, start, end) {
   quickSort(data, j + 1, end);
 }
 
-quickSort(array, 0, 9);
+quickSort(array, 0, array.length - 1);
 // 코드 끝
 console.log('finaly array ', array);
 
