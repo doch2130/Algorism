@@ -6,25 +6,33 @@
 // 오름차순 정렬하는 프로그램
 // 1 10 5 8 7 6 4 3 2 9
 
-let min = 9999,
-  index = 0,
-  temp = 0;
+// let min = 9999;
+// let index = 0;
+// let temp = 0;
 const array = [1, 10, 5, 8, 7, 6, 4, 3, 2, 9];
+// const array = [3, 1, 2, 5, 4];
 
 console.log('start array ', array);
-for (let i = 0; i < 10; i++) {
-  min = 999;
-  for (let j = i; j < 10; j++) {
-    if (min > array[j]) {
-      min = array[j];
-      index = j;
+
+function selectSort(array) {
+  let min = 9999;
+  let index = 0;
+  for (let i = 0; i < array.length; i++) {
+    min = 9999;
+    for (let j = i; j < array.length; j++) {
+      if (min > array[j]) {
+        min = array[j];
+        index = j;
+      }
     }
+    [array[i], array[index]] = [array[index], array[i]];
   }
-  temp = array[i];
-  array[i] = array[index];
-  array[index] = temp;
+  return array;
 }
-console.log('finaly array ', array);
+
+const result = selectSort(array);
+
+console.log('finaly array ', result);
 
 // 가장 작은 것을 선택해서 앞으로 보내기
 // 1 10 5 8 7 6 4 3 2 9

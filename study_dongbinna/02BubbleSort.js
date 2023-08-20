@@ -13,21 +13,33 @@ const array = [1, 10, 5, 8, 7, 6, 4, 3, 2, 9];
 
 console.log('start array ', array);
 // 코드 시작
-for (let i = 0; i < 10; i++) {
-  for (let j = 0; j < 9 - i; j++) {
-    if (array[j] > array[j + 1]) {
-      temp = array[j];
-      array[j] = array[j + 1];
-      array[j + 1] = temp;
+// for (let i = 0; i < 10; i++) {
+//   for (let j = 0; j < 9 - i; j++) {
+//     if (array[j] > array[j + 1]) {
+//       temp = array[j];
+//       array[j] = array[j + 1];
+//       array[j + 1] = temp;
+//     }
+//   }
+// }
+
+function bubbleSort(array) {
+  for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < array.length - 1 - i; j++) {
+      if(array[j] > array[j+1]) {
+        [array[j], array[j+1]] = [array[j+1], array[j]];
+      }
     }
   }
+  return array;
 }
+
+const result = bubbleSort(array);
+
 // 코드 끝
-console.log('finaly array ', array);
+console.log('finaly array ', result);
 
 // 효율성이 가장 떨어지는 알고리즘이다.
-
-// 가장 작은 것을 선택해서 앞으로 보내기
 
 // 1 10 5 8 7 6 4 3 2 9
 // 1 10 5 8 7 6 4 3 2 9

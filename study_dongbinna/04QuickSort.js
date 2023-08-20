@@ -14,6 +14,7 @@
 
 const array = [3, 7, 8, 1, 5, 9, 6, 10, 2, 4];
 // const array = [10, 1, 2, 3, 4, 5];
+// const array = [1, 10, 2, 3, 7, 5];
 
 console.log('start array ', array);
 // 코드 시작
@@ -26,7 +27,7 @@ function quickSort(data, start, end) {
   let key = start;
   let i = start + 1;
   let j = end;
-  let temp = 0;
+  // let temp = 0;
 
   while (i <= j) {
     // 엇갈릴 때까지 반복
@@ -46,17 +47,9 @@ function quickSort(data, start, end) {
     }
     if (i >= j) {
       // 엇갈린 상태면 키 값과 교체
-      // temp = data[j];
-      // data[j] = data[key];
-      // data[key] = temp;
-      // 사실 똑같은 코드임
-      temp = data[key];
-      data[key] = data[j];
-      data[j] = temp;
+      [data[key], data[j]] = [data[j], data[key]];
     } else {
-      temp = data[j];
-      data[j] = data[i];
-      data[i] = temp;
+      [data[i], data[j]] = [data[j], data[i]];
     }
   }
 
@@ -64,7 +57,8 @@ function quickSort(data, start, end) {
   quickSort(data, j + 1, end);
 }
 
-quickSort(array, 0, array.length - 1);
+const firstKeyValue = 0;
+quickSort(array, firstKeyValue, array.length - 1);
 // 코드 끝
 console.log('finaly array ', array);
 
