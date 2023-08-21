@@ -6,22 +6,10 @@
 // 오름차순 정렬하는 프로그램
 // 1, 10, 5, 8, 7, 6, 4, 3, 2, 9
 
-let min = 9999;
-let index = 0;
-let temp = 0;
-const array = [1, 10, 5, 8, 7, 6, 4, 3, 2, 9];
+
 
 console.log('start array ', array);
 // 코드 시작
-// for (let i = 0; i < 10; i++) {
-//   for (let j = 0; j < 9 - i; j++) {
-//     if (array[j] > array[j + 1]) {
-//       temp = array[j];
-//       array[j] = array[j + 1];
-//       array[j + 1] = temp;
-//     }
-//   }
-// }
 
 function bubbleSort(array) {
   for (let i = 0; i < array.length; i++) {
@@ -34,6 +22,7 @@ function bubbleSort(array) {
   return array;
 }
 
+const array = [1, 10, 5, 8, 7, 6, 4, 3, 2, 9];
 const result = bubbleSort(array);
 
 // 코드 끝
