@@ -15,16 +15,6 @@ const array = [1, 10, 5, 8, 7, 6, 4, 3, 2, 9];
 
 console.log('start array ', array);
 // 코드 시작
-// for (let i = 0; i < 9; i++) {
-//   j = i;
-//   while (j > 0 && array[j] > array[j + 1]) {
-//     temp = array[j];
-//     array[j] = array[j + 1];
-//     array[j + 1] = temp;
-//     j--;
-//   }
-// }
-
 function insertSort(array) {
   let j = 0;
   for(let i = 0; i < array.length; i++) {
