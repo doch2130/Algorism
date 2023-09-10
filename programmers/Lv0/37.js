@@ -21,7 +21,7 @@ function solution(a, b, c, d) {
       if(el[1] === 1)
   })
 
-  
+  //     Object.values 에서 4가 이쓴ㄴ지 체크, 3이 있는지 체크, 2가 있느지 체크??
   
   
   
