@@ -1,75 +1,69 @@
-const park = ["OOO","OSO","OXO","OOO"];
-const routes = ["E 2","S 3","W 1"];
-
-
-console.log(solution(park, routes));
-
-
 function solution(park, routes) {
+  // console.log(park[0].length);
+  // console.log(park.length);
+  const h = park.length;
+  const w = park[0].length;
+  // w => x축, h => y축
+  
+  const nav = {
+      'E': [0, 1],
+      'W': [0, -1],
+      'N': [-1, 0],
+      'S': [1, 0],
+  };
+  
+  const routeList = routes.map((el) => [el.split(' ')[0], Number(el.split(' ')[1])]);
+  // console.log('routeList ', routeList);
+  
+  const parkView = [];
   let start = [0, 0];
-  const parkArr = [];
-
-  for(let i = 0; i < park.length; i++) {
-    if(park[i].split('').indexOf('S') !== -1) {
-      start = [i, park[i].split('').indexOf('S')];
-    }
-    parkArr.push(park[i].split(''));
-  }
-  // console.log('start ', start);
-  // console.log('parkArr ', parkArr);
-
-  routes.forEach(el => {
-      const tmp = [el.split(' ')[0], Number(el.split(' ')[1])];
-      const prevStart = [...start];
-      let flag = false;
-      if(tmp[0] === 'E') {
-          for(let i = prevStart[1]+1; i < prevStart[1] + tmp[1]; i++) {
-              if(i >= parkArr[0].length || parkArr[prevStart[0]][i] === 'X') {
-                flag = true;
-                break;
-              }
-          }
-          if(!flag) {
-              prevStart[1] += tmp[1];
-          }
-      } else if(tmp[0] === 'W') {
-          for(let i = prevStart[1]-1; i >= prevStart[1] - tmp[1]; i--) {
-              if(i < 0 || parkArr[prevStart[0]][i] === 'X') {
-                flag = true;
-                break;
-              }
-          }
-          if(!flag) {
-              prevStart[1] -= tmp[1];
-          }
-      } else if(tmp[0] === 'N') {
-          for(let i = prevStart[0]-1; i >= prevStart[0] - tmp[1]; i--) {
-              if(i < 0 || parkArr[i][prevStart[1]] === 'X') {
-                flag = true;
-                break;
-              }
-          }
-          if(!flag) {
-              prevStart[0] -= tmp[1];
-          }
-      } else {
-          for(let i = prevStart[0]+1; i < prevStart[0] + tmp[1]; i++) {
-              if(i >= parkArr.length || parkArr[i][prevStart[1]] === 'X') {
-                flag = true;
-                break;
-              }
-          }
-          if(!flag) {
-              prevStart[0] += tmp[1];
-          }
-      }
-
-      if(prevStart[1] < parkArr[0].length && prevStart[0] < parkArr.length) {
-          // 범위 체크, 범위 내인 경우에만 업데이트
-          start = [...prevStart];
+  
+  park.forEach((el, index) => {
+      parkView.push(el.split(''));
+      if(el.split('').indexOf('S') !== -1) {
+          start = [index, el.split('').indexOf('S')];
       }
   });
   
-  return start;
+  // console.log('test ', nav['E'][1]);
   
+  // console.log('parkView ', parkView);
+  // console.log('start ' , start);
+
+  routeList.forEach((el, index) => {
+      const [direction, distance] = el;
+      const x = start[1] + nav[direction][1] * distance;
+      const y = start[0] + nav[direction][0] * distance;
+      
+      // 범위 설정
+      if(x < w && y < h && x >= 0 && y >= 0) {
+          let flag = false;
+          if(nav[direction][1] * distance !== 0) {
+              // x축 이동
+              for(let i = Math.min(start[1], x); i <= Math.max(start[1], x); i++) {
+                  if(parkView[start[0]][i] === 'X') {
+                      flag = true;
+                      break;
+                  }
+              }
+          } else if (nav[direction][0] * distance !== 0) {
+              // y축 이동
+              for(let i = Math.min(start[0], y); i <= Math.max(start[0], y); i++) {
+                  if(parkView[i][start[1]] === 'X') {
+                      flag = true;
+                      break;
+                  }
+              }
+          }
+          
+          if(!flag) {
+              start[1] = x;
+              start[0] = y;
+          }
+      }
+      // console.log(start);
+  });
+  
+  return start;
+
 }
